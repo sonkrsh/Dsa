@@ -2,28 +2,42 @@
 #include <vector>
 using namespace std;
 
-string AllParenthesis(int n, string temp)
+void maker(int n, int open, int close, vector<string> &ans, string temp)
+
 {
-    if (temp == "" && n == 1)
-    {
-        return "()";
-    }
-    temp = temp + ")";
-    if (n == 1)
-    {
-        return "(" + temp;
-    }
 
-    temp = "(" + AllParenthesis(n - 1, temp);
+    if (open == n)
+    {
+        while (close < n)
+        {
+            temp = temp + ')';
+            close++;
+        }
+        ans.push_back(temp);
+        return;
+    }
+    if (open > close)
+    {
 
-    return temp;
+        maker(n, open + 1, close, ans, temp + '(');
+        maker(n, open, close + 1, ans, temp + ')');
+    }
+    else
+    {
+
+        maker(n, open + 1, close, ans, temp + '(');
+    }
 }
 int main()
 {
-    int n = 7;
+    int n = 3;
     vector<string> ans;
-    string temp = "";
-    cout << AllParenthesis(n, temp);
+    int open = 0, close = 0;
+    maker(n, open, close, ans, "");
 
+    for (int i = 0; i <= ans.size(); i++)
+    {
+        cout << ans[i] << endl;
+    }
     return 0;
 }
