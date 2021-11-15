@@ -1,1 +1,1 @@
-cout << temp << endl;
+    vector<int> temp;
