@@ -4,7 +4,7 @@
 #include <sstream>
 using namespace std;
 
-void combinationSum(vector<int> &input, int perticular, int length, string ans, vector<int> &temp)
+void combinationSum(vector<int> &input, int perticular, int length, string ans, vector<string> &temp)
 {
     if (ans[ans.size() - 1] < ans[ans.size() - 2])
     {
@@ -17,31 +17,43 @@ void combinationSum(vector<int> &input, int perticular, int length, string ans, 
     if (length == 0)
     {
 
-        temp.push_back(stoi(ans));
+        temp.push_back(ans);
+
         return;
     }
 
     for (int i = 0; i < input.size(); i++)
     {
-        combinationSum(input, input[i], length - input[i], ans + to_string(input[i]), temp);
+        int flag = true;
+        for (int j = i - 1; j >= 0; j--)
+        {
+            if (input[i] == input[j])
+            {
+                flag = false;
+                break;
+            }
+            else
+            {
+                continue;
+            }
+        }
+        if (flag)
+        {
+            combinationSum(input, input[i], length - input[i], ans + to_string(input[i]), temp);
+        }
     }
 }
 int main()
 {
     vector<int> input;
-    input.push_back(6);
-    input.push_back(5);
-    input.push_back(7);
+    input.push_back(8);
     input.push_back(1);
     input.push_back(8);
-    input.push_back(2);
-    input.push_back(9);
-    input.push_back(9);
-    input.push_back(7);
-    input.push_back(7);
-    input.push_back(9);
-    vector<int> temp;
-    combinationSum(input, 0, 6, "", temp);
+    input.push_back(6);
+    input.push_back(8);
+
+    vector<string> temp;
+    combinationSum(input, 0, 12, "", temp);
     for (int i = 0; i < temp.size(); i++)
     {
         cout << temp[i] << endl;
