@@ -1,1 +1,4 @@
-    vector<int> temp;
+ if (input == "")
+    {
+        return output;
+    }
