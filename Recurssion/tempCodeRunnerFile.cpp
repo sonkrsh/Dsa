@@ -1,4 +1,1 @@
- if (input == "")
-    {
-        return output;
-    }
+aabbcc

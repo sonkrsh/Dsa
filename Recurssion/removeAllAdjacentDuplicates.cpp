@@ -4,38 +4,33 @@
 #include <sstream>
 using namespace std;
 
-string removeAdjacentDuplicates(string input, string output, int length, int current, bool check)
+string removeAdjacentDuplicates(string input)
 {
-
-    if (length == current)
+    int current=0;
+    string output="";
+    int n = input.length();
+    while ((n - 1) >= current)
     {
-
-        if (check)
+        if (input[current] != input[current + 1] && input[current] != input[current - 1])
         {
-
-            return removeAdjacentDuplicates(output, "", output.length(), 0, false);
+            output +=  input[current];
         }
-
-        return output;
+    
+        current++;
     }
-    if (input[current] != input[current + 1] && input[current] != input[current - 1])
+    if (n!=output.length() && output != "")
     {
-
-        output = output + input[current];
+        return removeAdjacentDuplicates(output);
     }
-    else
-    {
-        check = true;
-    }
-    return removeAdjacentDuplicates(input, output, length, current + 1, check);
+    return output;
 }
 
 int main()
 {
-    string input = "abc";
+    string input = "abccbccba";
     string output = "";
 
-    cout << removeAdjacentDuplicates(input, output, input.length(), 0, false);
+    cout << removeAdjacentDuplicates(input);
 
     return 0;
 }
