@@ -1,1 +1,2 @@
-34
+cout << i << endl;
+    // cout << j << endl;
